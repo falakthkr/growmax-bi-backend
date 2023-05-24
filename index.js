@@ -5,6 +5,7 @@ var bodyParser = require("body-parser");
 const cors = require("cors");
 
 const Task = require("./models/Task");
+const User = require("./models/User");
 
 dotenv.config();
 const app = express();
@@ -13,9 +14,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
 
-const todoRoute = require("./routes/todo")
+const todoRoute = require("./routes/todo");
+const userRoute = require("./routes/user");
 
-app.use("/todo", todoRoute)
+app.use("/todo", todoRoute);
+app.use("/auth", userRoute);
 
 mongoose
   .connect(process.env.DB_CONNECT.toString(), {
